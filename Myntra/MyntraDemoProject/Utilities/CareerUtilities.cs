@@ -1,5 +1,4 @@
 ﻿using ExcelDataReader;
-using MyntraDemoProject.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -9,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace MyntraDemoProject.Utilities
 {
-    internal class ExcelUtils
+    internal class CareerUtilities
     {
-        public static List<ExcelData> ReadExcelData(string excelFilePath, string sheetName)
+        public static List<CareerData> ReadExcelData(string excelFilePath, string sheetName)
         {
-            List<ExcelData> excelDataList = new List<ExcelData>();
+            List<CareerData> CareerDataList = new List<CareerData>();
             Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
 
             using (var stream = new FileStream(excelFilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
@@ -34,15 +33,18 @@ namespace MyntraDemoProject.Utilities
                     {
                         foreach (DataRow row in dataTable.Rows)
                         {
-                            ExcelData excelData = new ExcelData
+                            CareerData careerData = new CareerData
                             {
-                                SearchText = GetValueOrDefault(row, "searchtext"),
-                               
-
+                                //SearchText = GetValueOrDefault(row, "searchtext"),
+                                FirstNameInputBox = GetValueOrDefault(row, "firstName"),
+                                LastNameInputBox= GetValueOrDefault(row, "lastName"),
+                                EmailInputBox= GetValueOrDefault(row, "email"),
+                                PhoneNum= GetValueOrDefault(row, "mbno"),
+                                Location= GetValueOrDefault(row, "location"),
 
                             };
 
-                            excelDataList.Add(excelData);
+                            CareerDataList.Add(careerData);
                         }
                     }
                     else
@@ -52,7 +54,7 @@ namespace MyntraDemoProject.Utilities
                 }
             }
 
-            return excelDataList;
+            return CareerDataList;
         }
 
         static string GetValueOrDefault(DataRow row, string columnName)
@@ -62,3 +64,7 @@ namespace MyntraDemoProject.Utilities
         }
     }
 }
+
+
+
+                   

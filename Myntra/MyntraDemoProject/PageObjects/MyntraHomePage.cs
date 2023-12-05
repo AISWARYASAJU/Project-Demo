@@ -70,6 +70,15 @@ namespace MyntraDemoProject.PageObjects
         [CacheLookup]
         private IWebElement? Carrers { get; set; }
 
+        public ExploreCareers CareersClick()
+        {
+            Thread.Sleep(1000);
+            Carrers?.Click();
+            Thread.Sleep(3000);
+            return new ExploreCareers(driver);
+            
+        }
+
         public SearchedProductListPage SearchClick(string searchText)
         {
             SearchInputBox?.SendKeys(searchText);
@@ -158,6 +167,8 @@ namespace MyntraDemoProject.PageObjects
             fluentWait.Message = "Element Not Found";
             LoginMyntraInsider?.Click();
         }
+
+
 
       
     }
